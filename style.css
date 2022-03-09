@@ -5,13 +5,20 @@
 
 html,
 body {
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
 }
 
 section {
   display: grid;
   grid-template-columns: 50% 50%;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(45deg, #ec4895, #f59b0d);
 }
 
 /* styling of the machine. ---------------- */
@@ -34,12 +41,6 @@ section {
   height: 700px;
   width: 500px;
   z-index: 1;
-}
-
-.unuCButton {
-}
-
-.uCButton {
 }
 
 .moneyInTheMachine {
@@ -243,4 +244,118 @@ section {
 .handlingSide {
   grid-column-start: 2;
   grid-column-end: 2;
+  display: grid;
+  grid-template-rows: 35% 15% 50%;
+  text-align: center;
+}
+
+.uCButton {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+}
+
+.uCButton:hover {
+  cursor: pointer;
+}
+
+.unuCButton {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+}
+
+.unuCButton:hover {
+  cursor: pointer;
+}
+
+.infos h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.greet {
+  font-size: 40px;
+}
+
+.responseField {
+  width: 400px;
+  height: 100px;
+  background-color: #1111114f;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.cImg {
+  width: 50px;
+  height: 50px;
+}
+
+.infos {
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.usableCoins {
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.usableCoins h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.unusableCoins {
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.exchange {
+  margin-top: 20px;
+  background-color: #1111114f;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  height: 40px;
+}
+
+.exchangeDescription h1 {
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.exchangeNotes {
+  width: 400px;
+  height: 100px;
+  background-color: #1111114f;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.exchangeNotes h1 {
+  padding-left: 10px;
+  text-align: left;
+  padding-top: 10px;
+  font-size: 15px;
+}
+
+.exchangeInfo h1 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.exchange:hover {
+  cursor: pointer;
+}
+
+.sign {
+  text-align: right;
 }

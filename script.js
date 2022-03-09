@@ -21,6 +21,8 @@ const slots = document.querySelectorAll(".slotNumber");
 
 // functions
 
+// missing pressing button image change
+
 const deployProduct = (name) => {
   const selectedProduct = document.querySelector(`.${name}Bought`);
   selectedProduct.style.display = "block";
