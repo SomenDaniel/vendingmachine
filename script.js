@@ -120,82 +120,81 @@ placeSubmitter.addEventListener("click", function () {
   places.forEach((el) => {
     // When the entered numbers matching with one place number.
     if (el.innerHTML === selectedPlace) {
-      // Checking the product type.
-      if (
-        el.parentElement.previousElementSibling.lastElementChild.alt === "bomba"
-      ) {
-        // Checking if the product is already sold out at that location.
-        if (el.parentElement.previousElementSibling.children.length === 0) {
-          setErrorMessage("This place is sold out!");
-          // Checking if there is enough money in the machine.
-        } else if (moneyInTheMachine < 315) {
-          setErrorMessage("Not enough money!");
-          found = true;
-          // Performs the operation if everything is okay.
-        } else {
-          found = true;
-          deployProduct(
-            el.parentElement.previousElementSibling.lastElementChild.alt
-          );
-          giveChange(moneyInTheMachine, 315);
-          moneyInTheMachine = 0;
-          refreshDisplay(moneyInTheMachine);
-          setSuccessMessage("Enjoy your product!");
-          el.parentElement.previousElementSibling.lastElementChild.remove();
-        }
+      // Checking if the product is already sold out at that location.
+      if (el.parentElement.previousElementSibling.children.length === 0) {
+        setErrorMessage("Out of stock in this place.");
+        found = true;
+      } else {
         // Checking the product type.
-      } else if (
-        el.parentElement.previousElementSibling.lastElementChild.alt ===
-        "snickers"
-      ) {
-        // Checking if the product is already sold out at that location.
-        if (el.parentElement.previousElementSibling.children.length === 0) {
-          setErrorMessage("This place is sold out!");
+        if (
+          el.parentElement.previousElementSibling.lastElementChild.alt ===
+          "bomba"
+        ) {
+          //  Checking if there is enough money in the machine.
+          if (moneyInTheMachine < 315) {
+            setErrorMessage("You don't have enough money for the goods!");
+            found = true;
+            // Performs the operation if everything is okay.
+          } else {
+            found = true;
+            deployProduct(
+              el.parentElement.previousElementSibling.lastElementChild.alt
+            );
+            giveChange(moneyInTheMachine, 315);
+            moneyInTheMachine = 0;
+            refreshDisplay(moneyInTheMachine);
+            setSuccessMessage("Enjoy your product!");
+            el.parentElement.previousElementSibling.lastElementChild.remove();
+          }
+          // Checking the product type.
+        } else if (
+          el.parentElement.previousElementSibling.lastElementChild.alt ===
+          "snickers"
+        ) {
+          //  Checking if there is enough money in the machine.
+          if (moneyInTheMachine < 220) {
+            setErrorMessage("You don't have enough money for the goods!");
+            found = true;
+            // Performs the operation if everything is okay.
+          } else {
+            found = true;
+            deployProduct(
+              el.parentElement.previousElementSibling.lastElementChild.alt
+            );
+            giveChange(moneyInTheMachine, 220);
+            moneyInTheMachine = 0;
+            refreshDisplay(moneyInTheMachine);
+            setSuccessMessage("Enjoy your product!");
+            el.parentElement.previousElementSibling.lastElementChild.remove();
+          }
+          // Checking the product type.
+        } else if (
+          el.parentElement.previousElementSibling.lastElementChild.alt ===
+          "mars"
+        ) {
           // Checking if there is enough money in the machine.
-        } else if (moneyInTheMachine < 220) {
-          setErrorMessage("Not enough money!");
-          found = true;
-          // Performs the operation if everything is okay.
-        } else {
-          found = true;
-          deployProduct(
-            el.parentElement.previousElementSibling.lastElementChild.alt
-          );
-          giveChange(moneyInTheMachine, 220);
-          moneyInTheMachine = 0;
-          refreshDisplay(moneyInTheMachine);
-          setSuccessMessage("Enjoy your product!");
-          el.parentElement.previousElementSibling.lastElementChild.remove();
-        }
-        // Checking the product type.
-      } else if (
-        el.parentElement.previousElementSibling.lastElementChild.alt === "mars"
-      ) {
-        // Checking if the product is already sold out at that location
-        if (el.parentElement.previousElementSibling.children.length === 0) {
-          setErrorMessage("This place is sold out!");
-          // Checking if there is enough money in the machine.
-        } else if (moneyInTheMachine < 190) {
-          setErrorMessage("Not enough money!");
-          found = true;
-          // Performs the operation if everything is okay.
-        } else {
-          found = true;
-          deployProduct(
-            el.parentElement.previousElementSibling.lastElementChild.alt
-          );
-          giveChange(moneyInTheMachine, 190);
-          moneyInTheMachine = 0;
-          refreshDisplay(moneyInTheMachine);
-          setSuccessMessage("Enjoy your product!");
-          el.parentElement.previousElementSibling.lastElementChild.remove();
+          if (moneyInTheMachine < 190) {
+            setErrorMessage("You don't have enough money for the goods!");
+            found = true;
+            // Performs the operation if everything is okay.
+          } else {
+            found = true;
+            deployProduct(
+              el.parentElement.previousElementSibling.lastElementChild.alt
+            );
+            giveChange(moneyInTheMachine, 190);
+            moneyInTheMachine = 0;
+            refreshDisplay(moneyInTheMachine);
+            setSuccessMessage("Enjoy your product!");
+            el.parentElement.previousElementSibling.lastElementChild.remove();
+          }
         }
       }
     }
   });
   // Setting an error when the deployed numbers are invalid.
   if (!found) {
-    setErrorMessage("Invalid number");
+    setErrorMessage("Invalid number.");
   }
   selectedPlace = "";
 });
@@ -203,7 +202,7 @@ placeSubmitter.addEventListener("click", function () {
 // Coin button functionality.
 twoHundred.addEventListener("click", function () {
   if (balance < 200) {
-    setErrorMessage("Not enough balance");
+    setErrorMessage("You don't have that much money.");
   } else {
     addMoney(200);
     detractMoney(200);
@@ -213,7 +212,7 @@ twoHundred.addEventListener("click", function () {
 // Coin button functionality.
 hundred.addEventListener("click", function () {
   if (balance < 100) {
-    setErrorMessage("Not enough balance");
+    setErrorMessage("You don't have that much money.");
   } else {
     addMoney(100);
     detractMoney(100);
@@ -223,7 +222,7 @@ hundred.addEventListener("click", function () {
 // Coin button functionality.
 fifty.addEventListener("click", function () {
   if (balance < 50) {
-    setErrorMessage("Not enough balance");
+    setErrorMessage("You don't have that much money.");
   } else {
     addMoney(50);
     detractMoney(50);
@@ -246,7 +245,7 @@ cancel.addEventListener("click", function () {
 // Exchange button functionality.
 exchangeBtn.addEventListener("click", function () {
   if (change < 50) {
-    setErrorMessage("Not enough money to exchange");
+    setErrorMessage("Not enough money to exchange.");
   } else {
     balance = balance + 50;
     displayBalance.innerHTML = `Balance: ${balance} Ft`;
