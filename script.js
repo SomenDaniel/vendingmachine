@@ -15,7 +15,7 @@ const cancel = document.querySelector(".cancelButton");
 const numbers = document.querySelectorAll(".pinButton");
 const placeDeleter = document.querySelector(".delete");
 const placeSubmitter = document.querySelector(".add");
-const slots = document.querySelectorAll(".slotNumber");
+const places = document.querySelectorAll(".slotNumber");
 const error = document.querySelector(".error");
 const success = document.querySelector(".success");
 const displayBalance = document.querySelector(".balance");
@@ -24,8 +24,7 @@ const exchangeBtn = document.querySelector(".exchange");
 
 // functions
 
-// missing pressing button image change
-
+// Shows the product at the bottom of the machine.
 const deployProduct = (name) => {
   const selectedProduct = document.querySelector(`.${name}Bought`);
   selectedProduct.style.display = "block";
@@ -34,6 +33,7 @@ const deployProduct = (name) => {
   }, 3000);
 };
 
+// Setting error messages.
 const setErrorMessage = (message) => {
   error.innerHTML = message;
   setTimeout(() => {
@@ -41,6 +41,7 @@ const setErrorMessage = (message) => {
   }, 3000);
 };
 
+// Setting success messages.
 const setSuccessMessage = (message) => {
   success.innerHTML = message;
   setTimeout(() => {
@@ -48,31 +49,38 @@ const setSuccessMessage = (message) => {
   }, 3000);
 };
 
+// Setting the pressed numbers.
 const addToPlace = (number) => {
   selectedPlace = selectedPlace + `${number}`;
 };
 
+// Clears the machine display.
 const refreshDisplay = (amount) => {
   displayMoney.innerHTML = amount;
 };
 
+// Adding some money to the machine and the display.
 const addMoney = (amount) => {
   moneyInTheMachine = moneyInTheMachine + amount;
   refreshDisplay(moneyInTheMachine);
 };
 
+// Change money stats after successful purchase.
 const detractMoney = (amount) => {
   balance = balance - amount;
   displayBalance.innerHTML = `Balance: ${balance} Ft`;
 };
 
+// Change.
 const giveChange = (amount, price) => {
   let moneyBack = amount - price;
   change = change + moneyBack;
   displayChange.innerHTML = `Exchangable amount: ${change} Ft`;
 };
-// listeners
 
+// onClick events
+
+// Adding events to the pinpad numbers.
 numbers.forEach((el, i) => {
   if (i + 1 === 10) {
     el.addEventListener("click", function () {
@@ -80,7 +88,7 @@ numbers.forEach((el, i) => {
       el.children[0].src = "pinpad-button-pressed.png";
       setTimeout(() => {
         el.children[0].src = "pinpad-button-normal.png";
-      }, 500);
+      }, 100);
     });
   } else {
     el.addEventListener("click", function () {
@@ -88,35 +96,42 @@ numbers.forEach((el, i) => {
       el.children[0].src = "pinpad-button-pressed.png";
       setTimeout(() => {
         el.children[0].src = "pinpad-button-normal.png";
-      }, 500);
+      }, 100);
     });
   }
 });
 
+// Adding events to the pinpad c button.
 placeDeleter.addEventListener("click", function () {
   placeDeleter.children[0].src = "pinpad-button-pressed.png";
   setTimeout(() => {
     placeDeleter.children[0].src = "pinpad-button-normal.png";
-  }, 500);
+  }, 100);
   selectedPlace = "";
 });
 
+// Adding events to the pinpad ok button.
 placeSubmitter.addEventListener("click", function () {
   let found = false;
   placeSubmitter.children[0].src = "pinpad-button-pressed.png";
   setTimeout(() => {
     placeSubmitter.children[0].src = "pinpad-button-normal.png";
-  }, 500);
-  slots.forEach((el) => {
+  }, 100);
+  places.forEach((el) => {
+    // When the entered numbers matching with one place number.
     if (el.innerHTML === selectedPlace) {
+      // Checking the product type.
       if (
         el.parentElement.previousElementSibling.lastElementChild.alt === "bomba"
       ) {
+        // Checking if the product is already sold out at that location.
         if (el.parentElement.previousElementSibling.children.length === 0) {
           setErrorMessage("This place is sold out!");
+          // Checking if there is enough money in the machine.
         } else if (moneyInTheMachine < 315) {
           setErrorMessage("Not enough money!");
           found = true;
+          // Performs the operation if everything is okay.
         } else {
           found = true;
           deployProduct(
@@ -128,15 +143,19 @@ placeSubmitter.addEventListener("click", function () {
           setSuccessMessage("Enjoy your product!");
           el.parentElement.previousElementSibling.lastElementChild.remove();
         }
+        // Checking the product type.
       } else if (
         el.parentElement.previousElementSibling.lastElementChild.alt ===
         "snickers"
       ) {
+        // Checking if the product is already sold out at that location.
         if (el.parentElement.previousElementSibling.children.length === 0) {
           setErrorMessage("This place is sold out!");
+          // Checking if there is enough money in the machine.
         } else if (moneyInTheMachine < 220) {
           setErrorMessage("Not enough money!");
           found = true;
+          // Performs the operation if everything is okay.
         } else {
           found = true;
           deployProduct(
@@ -148,14 +167,18 @@ placeSubmitter.addEventListener("click", function () {
           setSuccessMessage("Enjoy your product!");
           el.parentElement.previousElementSibling.lastElementChild.remove();
         }
+        // Checking the product type.
       } else if (
         el.parentElement.previousElementSibling.lastElementChild.alt === "mars"
       ) {
+        // Checking if the product is already sold out at that location
         if (el.parentElement.previousElementSibling.children.length === 0) {
           setErrorMessage("This place is sold out!");
+          // Checking if there is enough money in the machine.
         } else if (moneyInTheMachine < 190) {
           setErrorMessage("Not enough money!");
           found = true;
+          // Performs the operation if everything is okay.
         } else {
           found = true;
           deployProduct(
@@ -170,12 +193,14 @@ placeSubmitter.addEventListener("click", function () {
       }
     }
   });
+  // Setting an error when the deployed numbers are invalid.
   if (!found) {
     setErrorMessage("Invalid number");
   }
   selectedPlace = "";
 });
 
+// Coin button functionality.
 twoHundred.addEventListener("click", function () {
   if (balance < 200) {
     setErrorMessage("Not enough balance");
@@ -185,6 +210,7 @@ twoHundred.addEventListener("click", function () {
   }
 });
 
+// Coin button functionality.
 hundred.addEventListener("click", function () {
   if (balance < 100) {
     setErrorMessage("Not enough balance");
@@ -194,6 +220,7 @@ hundred.addEventListener("click", function () {
   }
 });
 
+// Coin button functionality.
 fifty.addEventListener("click", function () {
   if (balance < 50) {
     setErrorMessage("Not enough balance");
@@ -203,6 +230,7 @@ fifty.addEventListener("click", function () {
   }
 });
 
+// Cancel button functionality.
 cancel.addEventListener("click", function () {
   if (moneyInTheMachine === 0) {
     setErrorMessage("No money in the machine.");
@@ -215,6 +243,7 @@ cancel.addEventListener("click", function () {
   }
 });
 
+// Exchange button functionality.
 exchangeBtn.addEventListener("click", function () {
   if (change < 50) {
     setErrorMessage("Not enough money to exchange");
@@ -225,5 +254,3 @@ exchangeBtn.addEventListener("click", function () {
     displayChange.innerHTML = `Exchangable amount: ${change} Ft`;
   }
 });
-
-// cancel.addEventListener("click", functi);
