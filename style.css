@@ -3,21 +3,16 @@
   padding: 0px;
 }
 
-html,
-body {
+section {
+  font-family: "Fredoka", sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   overflow: auto;
-}
-
-section {
   display: grid;
   grid-template-columns: 50% 50%;
-  height: 100%;
-  width: 100%;
   background: linear-gradient(45deg, #ec4895, #f59b0d);
 }
 
@@ -44,11 +39,12 @@ section {
 }
 
 .moneyInTheMachine {
-  color: white;
+  color: red;
+  font-size: 25px;
   z-index: 3;
   position: absolute;
-  top: 50px;
-  right: 37px;
+  top: 60px;
+  right: 50px;
 }
 
 .display {
@@ -63,9 +59,14 @@ section {
 .cancelButton {
   width: 32px;
   height: 32px;
+  border: none;
   position: absolute;
   top: 156px;
   right: 50px;
+}
+
+.cancelButton :hover {
+  cursor: pointer;
 }
 
 .cancel {
@@ -124,6 +125,14 @@ section {
 }
 
 .pinButton :hover {
+  cursor: pointer;
+}
+
+.add :hover {
+  cursor: pointer;
+}
+
+.delete :hover {
   cursor: pointer;
 }
 
@@ -281,6 +290,7 @@ section {
 }
 
 .responseField {
+  display: flex;
   width: 400px;
   height: 100px;
   background-color: #1111114f;
@@ -288,6 +298,7 @@ section {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .cImg {
@@ -358,4 +369,14 @@ section {
 
 .sign {
   text-align: right;
+}
+
+.error {
+  color: red;
+  margin-left: 30px;
+}
+
+.success {
+  color: green;
+  margin-left: 30px;
 }
